@@ -1,25 +1,23 @@
 import Event from "../models/eventModel.js";
-import User from "../models/User.js";
+import User from "../models/userModel.js";
 
 export const createEvent = async (req, res) => {
   try {
-    const { userId, Title, Description, Category, DueDate, Priority, Status } =
-      req.body;
-    const user = await User.findBuId(userId);
-    const newEvent = new Post({
+    const { userId, Title, Description, Category, Priority, Status } = req.body;
+    const user = await User.findById(userId);
+    const newEvent = new Event({
       userId,
       name: user.name,
       Title,
       Description,
       Category,
-      DueDate,
       Priority,
       Status,
     });
     await newEvent.save();
 
     const Event = await Event.find();
-    res.status(201).json(post);
+    res.status(201).json(Event);
   } catch (err) {
     res.status(409).json({ message: err.message });
   }

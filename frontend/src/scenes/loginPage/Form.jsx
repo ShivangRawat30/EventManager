@@ -34,7 +34,7 @@ const initialValuesLogin = {
   password: "",
 };
 
-const Form = () => {
+const Form = ({ userId }) => {
   const [pageType, setPageType] = useState("login");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -81,7 +81,7 @@ const Form = () => {
           token: loggedIn.token,
         })
       );
-      navigate("/home");
+      navigate(`/home/${userId}`);
     }
   };
 
@@ -128,7 +128,7 @@ const Form = () => {
                   gridColumn: "span 4",
                   border: "1px solid white",
                   borderRadius: "10px",
-                  color: "white",
+                  color: "blue",
                 }}
               />
             )}

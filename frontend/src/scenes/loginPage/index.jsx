@@ -1,7 +1,10 @@
 import { Box, Typography, useMediaQuery } from "@mui/material";
 import Form from "./Form";
+import { useSelector } from "react-redux";
+import state from "../../state";
 
 const LoginPage = () => {
+  const { _id } = useSelector((state) => state.user);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   return (
     <Box>
@@ -38,7 +41,7 @@ const LoginPage = () => {
         >
           Start Keeping logs
         </Typography>
-        <Form />
+        <Form userId={_id} />
       </Box>
     </Box>
   );
