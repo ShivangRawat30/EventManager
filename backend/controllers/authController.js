@@ -1,26 +1,27 @@
-const jwt = require("jsonwebtoken");
-const User = require("./../models/userModel");
-const bcrypt = require("bcrypt");
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import User from "../models/userModel.js";
 
-exports.signup = async (req, res) => {
+export const signup = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-
+    console.log(req.body);
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
 
     const newUser = new User({
-      name,
+      name: req.body.name,
       email,
       password: passwordHash,
     });
     const savedUser = await newUser.save();
     res.status(201).json(savedUser);
   } catch (err) {
+    console.log(err);
     res.status(500).json({ error: err.message });
   }
 };
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email: email });
@@ -33,6 +34,7 @@ exports.login = async (req, res) => {
     delete user.password;
     res.status(200).json({ token, user });
   } catch (err) {
+    console.log(err);
     res.status(500).json({ error: err.message });
   }
 };
