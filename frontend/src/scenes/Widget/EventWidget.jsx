@@ -50,7 +50,7 @@ const EventWidget = ({
     });
   };
   useEffect(() => {
-    window.location.reload();
+    console.log(events);
   }, [events]);
   return (
     <WidgetWrapper
