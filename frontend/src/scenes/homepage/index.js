@@ -15,7 +15,7 @@ const HomePage = () => {
 
   const getUser = async () => {
     const response = await fetch(
-      `http://localhost:3001/events/${userId}/myevents?cacheBuster=${Math.random()}`,
+      `https://task-manager-ten-silk.vercel.app/events/${userId}/myevents?cacheBuster=${Math.random()}`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },

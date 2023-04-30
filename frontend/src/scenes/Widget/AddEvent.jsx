@@ -27,7 +27,7 @@ const AddEventWidget = ({ userId }) => {
     formData.append("Priority", priority);
     formData.append("Status", status);
     const response = await fetch(
-      `http://localhost:3001/events/${userId}/newevent`,
+      `https://task-manager-ten-silk.vercel.app/events/${userId}/newevent`,
       {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },

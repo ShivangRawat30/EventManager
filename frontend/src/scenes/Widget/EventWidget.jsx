@@ -23,7 +23,7 @@ const EventWidget = ({
 
   const getUserEvents = async () => {
     const response = await fetch(
-      `http://localhost:3001/events/${userId}/myevents`,
+      `https://task-manager-ten-silk.vercel.app/events/${userId}/myevents`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
@@ -36,9 +36,12 @@ const EventWidget = ({
     }
   };
   const DeleteEvent = async () => {
-    await fetch(`http://localhost:3001/events/${eventId}/delete`, {
-      method: "DELETE",
-    }).then((response) => {
+    await fetch(
+      `https://task-manager-ten-silk.vercel.app/events/${eventId}/delete`,
+      {
+        method: "DELETE",
+      }
+    ).then((response) => {
       if (response.ok) {
         getUserEvents();
         window.location.reload();

@@ -10,7 +10,7 @@ const EventsWidget = ({ userId }) => {
 
   const getUserEvents = async () => {
     const response = await fetch(
-      `http://localhost:3001/events/${userId}/myevents`,
+      `https://task-manager-ten-silk.vercel.app/events/${userId}/myevents`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
