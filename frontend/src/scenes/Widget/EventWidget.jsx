@@ -30,7 +30,6 @@ const EventWidget = ({
       }
     );
     const data = await response.json();
-    console.log(data);
     if (Array.isArray(data)) {
       dispatch(setEvents({ events: data }));
     }
@@ -49,11 +48,8 @@ const EventWidget = ({
         alert("Failed to delete event");
       }
     });
-    console.log(events);
   };
-  useEffect(() => {
-    console.log(events);
-  }, [events]);
+  useEffect(() => {}, [events]);
   return (
     <WidgetWrapper
       sx={{ border: "2px solid #e1ffff80", boxShadow: 5, margin: "1rem" }}

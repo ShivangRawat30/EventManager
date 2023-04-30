@@ -28,7 +28,6 @@ export const authSlice = createSlice({
           if (event._id === eventToUpdate._id) return eventToUpdate;
           return event;
         });
-        console.log(updatedEvents);
       }
     },
   },

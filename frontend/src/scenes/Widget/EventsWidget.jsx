@@ -17,7 +17,6 @@ const EventsWidget = ({ userId }) => {
       }
     );
     const data = await response.json();
-    console.log(data);
     if (Array.isArray(data)) {
       dispatch(setEvents({ events: data }));
     }
