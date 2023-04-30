@@ -128,7 +128,6 @@ const Form = ({ userId }) => {
                   gridColumn: "span 4",
                   border: "1px solid white",
                   borderRadius: "10px",
-                  color: "blue",
                 }}
               />
             )}

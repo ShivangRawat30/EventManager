@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   user: null,
   token: null,
-  events: [],
+  events: [], // events is initialized as an empty array
 };
 
 export const authSlice = createSlice({
@@ -22,11 +22,14 @@ export const authSlice = createSlice({
       state.events = action.payload.events;
     },
     setEvent: (state, action) => {
-      const updatedEvents = state.posts.map((event) => {
-        if (event._id === action.payload.event._id) return action.payload.event;
-        return event;
-      });
-      state.posts = updatedEvents;
+      const eventToUpdate = action.payload.event;
+      if (eventToUpdate) {
+        const updatedEvents = state.events.map((event) => {
+          if (event._id === eventToUpdate._id) return eventToUpdate;
+          return event;
+        });
+        console.log(updatedEvents);
+      }
     },
   },
 });

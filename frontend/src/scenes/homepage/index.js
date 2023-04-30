@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Navbar from "../Navbar/index.js";
 import AddEventWidget from "../Widget/AddEvent.jsx";
-import state from "../../state/index.js";
 import EventsWidget from "../Widget/EventsWidget.jsx";
 
 const HomePage = () => {
@@ -15,10 +14,13 @@ const HomePage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 
   const getUser = async () => {
-    const response = await fetch(`http://localhost:3001/events/${userId}`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await fetch(
+      `http://localhost:3001/events/${userId}/myevents?cacheBuster=${Math.random()}`,
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     const data = await response.json();
     setUser(data);
   };
@@ -40,14 +42,14 @@ const HomePage = () => {
         justifyContent="center"
       >
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
-          <AddEventWidget userId={userId} picturePath={user.picturePath} />
+          <AddEventWidget userId={_id} />
         </Box>
         <Box
           flexBasis={isNonMobileScreens ? "42%" : undefined}
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
           <Box m="2rem 0" />
-          <EventsWidget userId={userId} isProfile />
+          <EventsWidget userId={_id} />
         </Box>
       </Box>
     </Box>

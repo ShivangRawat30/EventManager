@@ -1,45 +1,22 @@
-import {
-  EditOutlined,
-  DeleteOutlined,
-  AttachFileOutlined,
-  GifBoxOutlined,
-  ImageOutlined,
-  MicOutlined,
-  MoreHorizOutlined,
-} from "@mui/icons-material";
-import DatePicker from "react-datepicker";
-import {
-  Box,
-  Divider,
-  Typography,
-  InputBase,
-  useTheme,
-  Button,
-  IconButton,
-  useMediaQuery,
-  MenuItem,
-  NativeSelect,
-} from "@mui/material";
+import { Divider, InputBase, Button, NativeSelect } from "@mui/material";
 
 import FlexBetween from "../../components/FlexBetween";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setEvents } from "../../state";
 import WidgetWrapper from "../../components/WidgetWrapper";
-import { orange } from "@mui/material/colors";
 
 const AddEventWidget = ({ userId }) => {
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [priority, setPriority] = useState("");
-  const [status, setStatus] = useState("");
+  const [priority, setPriority] = useState("imp");
+  const [status, setStatus] = useState("pending");
 
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [cat, setCat] = useState("");
   const { _id } = useSelector((state) => state.user);
+
   const token = useSelector((state) => state.token);
-  const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
   const handleEvent = async () => {
     const formData = new FormData();
@@ -50,11 +27,11 @@ const AddEventWidget = ({ userId }) => {
     formData.append("Priority", priority);
     formData.append("Status", status);
     const response = await fetch(
-      `http://localhost:3001/events/${userId}/myevents`,
+      `http://localhost:3001/events/${userId}/newevent`,
       {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
-        body: formData,
+        body: new URLSearchParams(formData),
       }
     );
     const events = await response.json();
@@ -141,12 +118,12 @@ const AddEventWidget = ({ userId }) => {
             color: "white",
             margin: "0.5rem 0",
           }}
-          value={priority}
           onChange={(event) => setPriority(event.target.value)}
+          value={priority}
         >
-          <option value="">Important</option>
-          <option value="option1">V. Important</option>
-          <option value="option2">Not so Important</option>
+          <option value="imp">Important</option>
+          <option value="very-imp">V. Important</option>
+          <option value="not so important">Not so Important</option>
         </NativeSelect>
       </FlexBetween>
       <FlexBetween>
@@ -160,12 +137,12 @@ const AddEventWidget = ({ userId }) => {
             color: "white",
             margin: "0.5rem 0",
           }}
-          value={status}
           onChange={(event) => setStatus(event.target.value)}
+          value={status}
         >
-          <option value="">Pending</option>
-          <option value="option1">On progress</option>
-          <option value="option2">Completed</option>
+          <option value="pending">Pending</option>
+          <option value="in progress">On progress</option>
+          <option value="completed">Completed</option>
         </NativeSelect>
       </FlexBetween>
 

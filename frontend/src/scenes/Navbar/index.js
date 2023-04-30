@@ -11,14 +11,12 @@ import {
 } from "@mui/material";
 import { Message, Notifications, Help, Menu, Close } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
-import { setMode, setLogout } from "../../state/index";
-import { useNavigate } from "react-router-dom";
+import { setLogout } from "../../state/index";
 import FlexBetween from "../../components/FlexBetween";
 
 const Navbar = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
@@ -31,7 +29,6 @@ const Navbar = () => {
           fontWeight="bold"
           fontSize="clamp(1rem, 2rem, 2.25rem)"
           color="white"
-          onClick={() => navigate("/home")}
           sx={{
             textShadow: "1px 2px gray",
             "&:hover": {
@@ -40,7 +37,7 @@ const Navbar = () => {
             },
           }}
         >
-          Event Manager
+          Task Manager
         </Typography>
       </FlexBetween>
       {isNonMobileScreens ? (
@@ -92,8 +89,10 @@ const Navbar = () => {
           zIndex="10"
           maxWidth="500px"
           minWidth="300px"
-          backgroundImage="url('https://raw.githubusercontent.com/Hashtechieofficial/Form-/main/background6.jpg')"
           boxShadow={5}
+          sx={{
+            background: "linear-gradient(to bottom, #742744 10%, #111C30 100%)",
+          }}
         >
           {/* CLOSE ICON */}
           <Box

@@ -1,13 +1,13 @@
 import { Box, Typography, useMediaQuery } from "@mui/material";
 import Form from "./Form";
 import { useSelector } from "react-redux";
-import state from "../../state";
 
 const LoginPage = () => {
-  const { _id } = useSelector((state) => state.user);
+  const { _id } = useSelector((state) => state.user || {});
+
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   return (
-    <Box>
+    <Box borderBottom="1px solid black">
       <Box width="100%" p="1rem 6%" textAlign="center">
         <Typography
           fontWeight="bold"
@@ -15,7 +15,7 @@ const LoginPage = () => {
           color="white"
           textTransform="uppercase"
         >
-          Event Manager
+          Task Manager
         </Typography>
       </Box>
 
@@ -30,7 +30,7 @@ const LoginPage = () => {
         marginTop="10rem"
         position="relative"
         z-index="0"
-        filter="blur(4px)"
+        filter="blur(4)"
       >
         <Typography
           fontWeight="600"
@@ -39,7 +39,7 @@ const LoginPage = () => {
           color="white"
           textTransform="uppercase"
         >
-          Start Keeping logs
+          logIn or signUp....
         </Typography>
         <Form userId={_id} />
       </Box>

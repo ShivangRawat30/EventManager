@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setEvent } from "../../state/index";
+import { setEvent, setEvents } from "../../state/index";
 import EventWidget from "./EventWidget";
 
 const EventsWidget = ({ userId }) => {
@@ -17,7 +17,10 @@ const EventsWidget = ({ userId }) => {
       }
     );
     const data = await response.json();
-    dispatch(setEvent({ events: data }));
+    console.log(data);
+    if (Array.isArray(data)) {
+      dispatch(setEvents({ events: data }));
+    }
   };
 
   useEffect(() => {
@@ -26,16 +29,24 @@ const EventsWidget = ({ userId }) => {
 
   return (
     <>
-      {events.map(({ Title, Description, Category, Priority, Status }) => (
-        <EventWidget
-          eventUserId={userId}
-          Title={Title}
-          description={Description}
-          category={Category}
-          Priority={Priority}
-          Status={Status}
-        />
-      ))}
+      {events ? (
+        events.map(
+          ({ _id, Title, Description, Category, Priority, Status }) => (
+            <EventWidget
+              key={_id}
+              useId={userId}
+              eventId={_id}
+              Title={Title}
+              description={Description}
+              category={Category}
+              Priority={Priority}
+              Status={Status}
+            />
+          )
+        )
+      ) : (
+        <p>No events found.</p>
+      )}
     </>
   );
 };
