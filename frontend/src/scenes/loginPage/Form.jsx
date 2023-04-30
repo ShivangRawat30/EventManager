@@ -71,6 +71,7 @@ const Form = ({ userId }) => {
       "https://task-manager-ten-silk.vercel.app/users/login",
       {
         method: "POST",
+        mode: "cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       }
