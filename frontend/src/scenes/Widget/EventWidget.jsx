@@ -49,7 +49,9 @@ const EventWidget = ({
       }
     });
   };
-  useEffect(() => {}, [events]);
+  useEffect(() => {
+    window.location.reload();
+  }, [events]);
   return (
     <WidgetWrapper
       sx={{ border: "2px solid #e1ffff80", boxShadow: 5, margin: "1rem" }}
